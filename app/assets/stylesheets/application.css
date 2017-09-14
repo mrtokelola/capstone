@@ -13,3 +13,19 @@
  *= require_tree .
  *= require_self
  */
+#container {
+  height: 400px;
+  width: 400px;
+  position: relative;
+}
+
+.bottle-text {
+  z-index: 100;
+  position: absolute;
+  color: black;
+  font-size: 14px;
+  font-weight: bold;
+  left: 35px;
+  top: 300px;
+  padding-right: 90px;
+}

@@ -1,0 +1,49 @@
+<% if current_user.prescriptions.first && @prescription %>
+<h1> <%= @prescription.product.name %>  </h1>
+<div class="row">
+              <div class="col-md-6">
+                <div class="boxed-feature">
+                  <i class="icon-document-person"></i>
+                  <div class="feature-desc">
+                    <h2 class="feature-title" >Medicine</h2>
+                    <p><%= @prescription.product.description %></p>
+                  </div>
+                </div>
+                <div class="boxed-feature">
+                  <i class="icon-bell-2"></i>
+                  <div class="feature-desc">
+                    <h2 class="feature-title">Prescription</h2>
+                    <p><%= @prescription.dosage %></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="boxed-feature">
+                  <i class="icon-man-chart"></i>
+                  <div class="feature-desc">
+                    <h2 class="feature-title">Side Effects</h2>
+                    <p><%= @prescription.product.side_effects %></p>
+                  </div>
+                </div>
+              </div>
+
+</div>
+<div class="container">
+<div class="row">
+  <div class="col-md-4">
+    <img src="/pill-bottle.png" style="width: 100%">
+    <p class="bottle-text"><%= @prescription.product.description %></p>
+  </div>
+  <div class="col-md-4">
+    <img src="/pill-bottle.png" style="width: 100%">
+    <p class="bottle-text"><%= @prescription.dosage %></p>
+  </div>
+  <div class="col-md-4">
+    <img src="/pill-bottle.png" style="width: 100%">
+    <p class="bottle-text"><%= @prescription.product.side_effects %></p>
+  </div>
+</div>
+</div>
+<% else %>
+<h1> No prescription available </h1>
+<% end %>

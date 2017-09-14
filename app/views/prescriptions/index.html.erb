@@ -1,0 +1,60 @@
+      <main class="main-content">
+
+        <div class="page">
+          <div class="container">
+            <h1 id="color"> <u> Prescriptions for <%= current_user.first_name %></u></h1>
+
+            <div class="filter-links filterable-nav">
+              <select class="mobile-filter">
+                <option value="*">Show all</option>
+                <option value=".skyscraper">skyscraper</option>
+                <option value=".shopping-center">shopping-center</option>
+                <option value=".apartment">apartment</option>
+              </select>
+              <strong>Select Category: </strong>
+              <a href="#" class="white-button current wow fadeInRight" data-filter="*">Show all</a>
+              <% MedicalCategory.all.each do |medical_category| %>
+              <a href="#" class="white-button wow fadeInRight" data-wow-delay=".2s" data-filter=".category-<%= medical_category.id %>"><%= medical_category.name %></a>
+              <% end %>
+              <!-- <a href="#" class="wow fadeInRight" data-wow-delay=".2s" data-filter=".skyscraper">Stomach Pain</a> -->
+              <!-- <a href="#" class="wow fadeInRight" data-wow-delay=".4s" data-filter=".shopping-center">Infection</a> -->
+              <!-- <a href="#" class="wow fadeInRight" data-wow-delay=".6s" data-filter=".apartment">Aches And Pains</a> -->
+              <!-- <a href="#" class="wow fadeInRight" data-wow-delay=".6s" data-filter=".apartment">Allergies</a> -->
+            </div>
+
+            <div class="filterable-items">
+              <% @prescriptions.each do |prescription| %>
+              <div class="insurance-item filterable-item category-<%= prescription.product.medical_category.id %>">
+                <div class="insurance-content">
+                  <div class="insurance-icon"><i class="icon-sofa"></i></div>
+                  <h3 class="insurance-title"><%= prescription.product.name %></h3>
+                  <p>Amount: <%= prescription.amount %></p>
+                  <!-- <a href="#" class="button">See details</a> -->
+
+                  <a href="/prescriptions/<%= prescription.id %>/edit" class="btn btn-default"> Edit </a>
+                  <br>
+                  <a href="/prescriptions/<%= prescription.id %>" class="btn btn-default"> View prescription </a>
+                  <br>
+                    <%= form_tag "/prescriptions/#{prescription.id}", method: :post do %>
+                      <button class="btn btn-default"> Delete prescription </button>
+                    <% end %>
+                  <br>
+                </div>
+              </div>
+              <% end %>
+            </div>
+
+          </div>
+        </div> <!-- .page -->
+      </main>
+
+
+<style type="text/css">
+  #color {
+    color: white;
+  }
+
+  .more{
+  color:red;
+  }
+</style>
