@@ -26,7 +26,7 @@
               <% @prescriptions.each do |prescription| %>
               <div class="insurance-item filterable-item category-<%= prescription.product.medical_category.id %>">
                 <div class="insurance-content">
-                  <div class="insurance-icon"><i class="icon-sofa"></i></div>
+                  <div class="insurance-icon"><i class="icon-server-add"></i></div>
                   <h3 class="insurance-title"><%= prescription.product.name %></h3>
                   <p>Amount: <%= prescription.amount %></p>
                   <!-- <a href="#" class="button">See details</a> -->
