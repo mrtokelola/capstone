@@ -23,12 +23,16 @@ class PrescriptionsController < ApplicationController
     prescription.save
 
     job_id =
-      Rufus::Scheduler.singleton.in params[:schedule] do
-        # Rails.logger.info "Time to take your prescription: http://chillpill.localtunnel.me/prescriptions/#{prescription.id}/edit"
+      Rufus::Scheduler.singleton.in '5s' do
+      # Rufus::Scheduler.singleton.in params[:schedule] do
+        Rails.logger.info "Time to take your prescription: http://chillpill.localtunnel.me/prescriptions/#{prescription.id}/edit"
 
         # put your own credentials here 
-        account_sid = 'AC372d9c4127c1966b7f2703d77d39b8d8' 
-        auth_token = 'aa17503bf351fc1f367e81f48a7e5546' 
+        account_sid = ENV['twilio_account_sid'] 
+        auth_token = ENV['twilio_auth_token'] 
+
+        puts "account sid is #{account_sid}"
+        puts "auth_token is #{auth_token}"
 
         # set up a client to talk to the Twilio REST API 
         @client = Twilio::REST::Client.new account_sid, auth_token 
@@ -39,15 +43,16 @@ class PrescriptionsController < ApplicationController
           :body => "Time to take your prescription: http://chillpill.localtunnel.me/prescriptions/#{prescription.id}/edit" 
         )
       end
+    Rails.logger.info "Successfully created..."
     redirect_to "/"
   end
 
   def show
     @prescription = Prescription.find_by(id: params[:id])
     if @prescription
-    puts "---------------------"
-    puts @prescription.dosage
-    puts "---------------------"
+      puts "---------------------"
+      puts @prescription.dosage
+      puts "---------------------"
     end
     render "show.html.erb"
   end
